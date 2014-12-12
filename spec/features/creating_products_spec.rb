@@ -12,7 +12,19 @@ feature 'Product Management' do
 
     click_button 'Create Product'
 
-    expect(page).to have_text('{Product was successfully created')
+    expect(page).to have_text('Product was successfully created')
   end
 
+  scenario 'user edits an existing product' do
+    product = FactoryGirl.create(:product)
+
+    visit edit_product_path(product)
+
+    fill_in 'Name', with: 'Apple'
+
+    click_button 'Update Product'
+
+    expect(page).to have_text('Product was successfully updated')
+    expect(page).to have_text('Apple')
+  end
 end
