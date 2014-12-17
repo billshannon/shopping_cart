@@ -48,3 +48,11 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+module Capybara
+  class Session
+    def has_image?(src)
+      has_xpath?("//img[contains(@src,'#{src}')]")
+    end
+  end
+end
